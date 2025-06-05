@@ -1,0 +1,24 @@
+{
+  "folders": [
+    {
+      "name": "LogicApps",
+      "path": "./LogicApps"
+    },
+    {
+      "name": "OrderRouter",
+      "path": "./OrderRouter"
+    },
+    {
+      "path": "FourthCoffeeServices"
+    }
+  ],
+  "settings": {
+    "terminal.integrated.env.windows": {
+      "PATH": "C:\\Users\\wsilveira\\.azurelogicapps\\dependencies\\DotNetSDK;${env:PATH}"
+    },
+    "omnisharp.dotNetCliPaths": [
+      "C:\\Users\\wsilveira\\.azurelogicapps\\dependencies\\DotNetSDK"
+    ],
+    "azurite.location": "C:\\Users\\wsilveira\\.azurelogicapps\\.azurite"
+  }
+}

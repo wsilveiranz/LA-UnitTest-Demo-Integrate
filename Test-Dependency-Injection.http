@@ -1,0 +1,28 @@
+POST http://localhost:7071/api/receive-order/triggers/When_a_HTTP_request_is_received/invoke?api-version=2022-05-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=E9fZ8lMvjP_H7ZJkC3HP5Pr_BaiyAR17feCNQvynAy0 HTTP/1.1
+Content-Type: application/json
+
+{
+        "orderId": "ORD-20250603-001",
+        "customerId": "X-789456",
+        "region": "NA",
+        "orderDetails": [
+            {
+                "productId": "BRZ-1001",
+                "productName": "Brazilian Coffee Beans - 1kg",
+                "quantity": 2,
+                "unitPrice": 15.00
+            },
+            {
+                "productId": "COL-1002",
+                "productName": "Colombian Coffee Beans - 1kg",
+                "quantity": 1,
+                "unitPrice": 10.00
+            },
+            {
+                "productId": "JAV-1003",
+                "productName": "Indonesian Java Coffee Beans - 1kg",
+                "quantity": 3,
+                "unitPrice": 20.00
+            }
+        ]
+    }
