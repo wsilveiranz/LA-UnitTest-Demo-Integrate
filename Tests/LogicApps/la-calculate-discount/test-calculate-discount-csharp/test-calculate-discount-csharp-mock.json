@@ -1,0 +1,48 @@
+{
+  "triggerMocks": {
+    "When_a_HTTP_request_is_received": {
+      "name": "When_a_HTTP_request_is_received",
+      "status": "Succeeded",
+      "outputs": {
+        "body": {
+          "orderId": "ORD-20250603-001",
+          "customerId": "X-789456",
+          "region": "NA",
+          "orderDetails": [
+            {
+              "productId": "BRZ-1001",
+              "productName": "Brazilian Coffee Beans - 1kg",
+              "quantity": 2,
+              "unitPrice": 15.0
+            },
+            {
+              "productId": "COL-1002",
+              "productName": "Colombian Coffee Beans - 1kg",
+              "quantity": 1,
+              "unitPrice": 10.0
+            },
+            {
+              "productId": "JAV-1003",
+              "productName": "Indonesian Java Coffee Beans - 1kg",
+              "quantity": 3,
+              "unitPrice": 20.0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "actionMocks": {
+    "Calculate_Discount": {
+      "name": "Calculate_Discount",
+      "status": "Succeeded",
+      "outputs": {
+        "body": {
+          "totalBeforeDiscount": 0.0,
+          "discountValue": 0.0,
+          "totalAfterDiscount": 0.0
+        }
+      }
+    }
+  }
+}

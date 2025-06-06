@@ -2,54 +2,23 @@
     "definition": {
         "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
         "actions": {
-            "Response": {
-                "type": "Response",
-                "kind": "http",
+            "Send_message": {
+                "type": "ServiceProvider",
                 "inputs": {
-                    "statusCode": 200,
-                    "headers": {
-                        "Content-Type": "text/plain"
-                    },
-                    "body": "@outputs('Generate_Calculated_Order')"
-                },
-                "runAfter": {
-                    "Generate_Calculated_Order": [
-                        "SUCCEEDED"
-                    ]
-                }
-            },
-            "Get_Destination_System": {
-                "type": "InvokeFunction",
-                "inputs": {
-                    "functionName": "OrderRouter",
                     "parameters": {
-                        "orderLocation": "@triggerBody()?['region']"
+                        "entityName": "@parameters('queueName')",
+                        "message": {
+                            "contentData": "@triggerBody()",
+                            "contentType": "application/json"
+                        }
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "serviceBus",
+                        "operationId": "sendMessage",
+                        "serviceProviderId": "/serviceProviders/serviceBus"
                     }
                 },
                 "runAfter": {}
-            },
-            "Calculate_Discount": {
-                "type": "InvokeFunction",
-                "inputs": {
-                    "functionName": "CalculateDiscount",
-                    "parameters": {
-                        "order": "@triggerBody()"
-                    }
-                },
-                "runAfter": {
-                    "Get_Destination_System": [
-                        "SUCCEEDED"
-                    ]
-                }
-            },
-            "Generate_Calculated_Order": {
-                "type": "Compose",
-                "inputs": "@union(triggerBody(),body('Calculate_Discount'))",
-                "runAfter": {
-                    "Calculate_Discount": [
-                        "SUCCEEDED"
-                    ]
-                }
             }
         },
         "triggers": {

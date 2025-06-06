@@ -1,0 +1,26 @@
+{
+  "commondataservice-ConnectionRuntimeUrl": {
+    "type": "String",
+    "value": "@appsetting('commondataservice-ConnectionRuntimeUrl')"
+  },
+  "commondataservice-Authentication": {
+    "type": "Object",
+    "value": {
+      "type": "Raw",
+      "scheme": "Key",
+      "parameter": "@appsetting('commondataservice-connectionKey')"
+    }
+  },
+  "insertTargetUrl": {
+    "type": "String",
+    "value": "https://ws-unittestdemo.free.beeceptor.com/insert"
+  },
+  "updateTargetUrl": {
+    "type": "String",
+    "value": "https://ws-unittestdemo.free.beeceptor.com/update"
+  },
+  "queueName": {
+    "type": "String",
+    "value": "unittest-create-from-scratch"
+  }
+}

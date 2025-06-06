@@ -1,0 +1,83 @@
+{
+  "triggerMocks": {
+    "When_messages_are_available_in_a_queue_(peek-lock)": {
+      "name": "When_messages_are_available_in_a_queue_(peek-lock)",
+      "status": "Succeeded",
+      "outputs": {
+        "body": {
+          "contentData": {
+            "orderId": "ORD-20250603-001",
+            "customerId": "X-789456",
+            "region": "NA",
+            "status": "New",
+            "orderDetails": [
+              {
+                "productId": "BRZ-1001",
+                "productName": "Brazilian Coffee Beans - 1kg",
+                "quantity": 2,
+                "unitPrice": 15.0
+              },
+              {
+                "productId": "COL-1002",
+                "productName": "Colombian Coffee Beans - 1kg",
+                "quantity": 1,
+                "unitPrice": 10.0
+              },
+              {
+                "productId": "JAV-1003",
+                "productName": "Indonesian Java Coffee Beans - 1kg",
+                "quantity": 3,
+                "unitPrice": 20.0
+              }
+            ]
+          },
+          "contentType": "application/json",
+          "userProperties": {
+            "diagnostic-Id": "00-a7d83e01f9a01a8324fd8bd7c6386589-0863ca42b820a8a3-00"
+          },
+          "messageId": "5d9cad16fedf4fa6be4640a22d439812",
+          "scheduledEnqueueTimeUtc": "1/1/0001 12:00:00 AM",
+          "timeToLive": "14.00:00:00",
+          "deliveryCount": 1,
+          "enqueuedSequenceNumber": 0,
+          "enqueuedTimeUtc": "2025-06-06T03:51:27.908Z",
+          "lockedUntilUtc": "2025-06-06T03:52:27.939Z",
+          "lockToken": "5f8863b4-fa49-4af2-93d2-07a02a824de8",
+          "sequenceNumber": 16
+        }
+      }
+    }
+  },
+  "actionMocks": {
+    "Call_External_API": {
+      "name": "Call_External_API",
+      "status": "Succeeded",
+      "outputs": {
+        "statusCode": 200,
+        "body": {
+          "status": "Awesome!"
+        }
+      }
+    },
+    "Complete_the_message_in_a_queue": {
+      "name": "Complete_the_message_in_a_queue",
+      "status": "Succeeded",
+      "outputs": {
+        "statusCode": "OK",
+        "body": {}
+      }
+    },
+    "Calculate_Discount": {
+      "name": "Calculate_Discount",
+      "status": "Succeeded",
+      "outputs": {
+        "statusCode": 200,
+        "body": {
+          "totalBeforeDiscount": 0.0,
+          "discountValue": 0.0,
+          "totalAfterDiscount": 0.0
+        }
+      }
+    }
+  }
+}

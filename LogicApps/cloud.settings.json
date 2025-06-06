@@ -1,0 +1,16 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "APP_KIND": "workflowapp",
+    "AzureWebJobsFeatureFlags": "EnableMultiLanguageWorker",
+    "ProjectDirectoryPath": "C:\\path\\to\\your\\project\\LogicApps",
+    "WORKFLOWS_SUBSCRIPTION_ID": "<Add Azure subscription ID>",
+    "WORKFLOWS_TENANT_ID": "<Add Azure tenant ID>",
+    "WORKFLOWS_RESOURCE_GROUP_NAME": "<Add Azure resource group name>",
+    "WORKFLOWS_LOCATION_NAME": "<Add Azure region name>",
+    "WORKFLOWS_MANAGEMENT_BASE_URI": "https://management.azure.com/",
+    "serviceBus_connectionString": "<Add Service Bus namespace connection string>"
+  }
+}

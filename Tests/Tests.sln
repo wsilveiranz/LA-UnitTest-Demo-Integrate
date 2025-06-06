@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderRouter", "OrderRouter.csproj", "{7885A0A0-07AE-4DFC-890A-8405CCE3E557}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicApps", "LogicApps\LogicApps.csproj", "{DF493F10-B212-4278-B92D-EB6158A211D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7885A0A0-07AE-4DFC-890A-8405CCE3E557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7885A0A0-07AE-4DFC-890A-8405CCE3E557}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7885A0A0-07AE-4DFC-890A-8405CCE3E557}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7885A0A0-07AE-4DFC-890A-8405CCE3E557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF493F10-B212-4278-B92D-EB6158A211D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF493F10-B212-4278-B92D-EB6158A211D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF493F10-B212-4278-B92D-EB6158A211D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF493F10-B212-4278-B92D-EB6158A211D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

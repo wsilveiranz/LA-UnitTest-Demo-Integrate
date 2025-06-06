@@ -2,14 +2,11 @@
   "folders": [
     {
       "name": "LogicApps",
-      "path": "./LogicApps"
+      "path": "LogicApps"
     },
     {
-      "name": "OrderRouter",
-      "path": "./OrderRouter"
-    },
-    {
-      "path": "FourthCoffeeServices"
+      "name": "Tests",
+      "path": "Tests"
     }
   ],
   "settings": {

@@ -1,0 +1,171 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "contentVersion": "1.0.0.0",
+        "actions": {
+            "Response": {
+                "type": "Response",
+                "kind": "Http",
+                "inputs": {
+                    "statusCode": 200,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "body": "@body('Calculate_Discount')",
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "totalBeforeDiscount": {
+                                "type": "integer"
+                            },
+                            "discountValue": {
+                                "type": "integer"
+                            },
+                            "totalAfterDiscount": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "runAfter": {
+                    "Calculate_Discount": [
+                        "SUCCEEDED"
+                    ]
+                }
+            },
+            "Switch": {
+                "type": "Switch",
+                "expression": "@triggerBody()?['region']",
+                "default": {
+                    "actions": {}
+                },
+                "cases": {
+                    "NA": {
+                        "actions": {
+                            "Set_NA_Discount": {
+                                "type": "SetVariable",
+                                "inputs": {
+                                    "name": "discount",
+                                    "value": 0.2
+                                }
+                            }
+                        },
+                        "case": "NA"
+                    },
+                    "EU": {
+                        "actions": {
+                            "Set_EU_Discount": {
+                                "type": "SetVariable",
+                                "inputs": {
+                                    "name": "discount",
+                                    "value": 0.15
+                                }
+                            }
+                        },
+                        "case": "EU"
+                    },
+                    "APAC": {
+                        "actions": {
+                            "Set_APAC_discount": {
+                                "type": "SetVariable",
+                                "inputs": {
+                                    "name": "discount",
+                                    "value": 0.1
+                                }
+                            }
+                        },
+                        "case": "APAC"
+                    }
+                },
+                "runAfter": {
+                    "Initialize_variables": [
+                        "SUCCEEDED"
+                    ]
+                }
+            },
+            "Initialize_variables": {
+                "type": "InitializeVariable",
+                "inputs": {
+                    "variables": [
+                        {
+                            "name": "discount",
+                            "type": "float",
+                            "value": 0
+                        }
+                    ]
+                },
+                "runAfter": {}
+            },
+            "Compose": {
+                "type": "Compose",
+                "inputs": "@variables('discount')",
+                "runAfter": {
+                    "Switch": [
+                        "SUCCEEDED"
+                    ]
+                }
+            },
+            "Calculate_Discount": {
+                "type": "CSharpScriptCode",
+                "inputs": {
+                    "CodeFile": "execute_csharp_script_code.csx"
+                },
+                "runAfter": {
+                    "Compose": [
+                        "SUCCEEDED"
+                    ]
+                }
+            }
+        },
+        "outputs": {},
+        "triggers": {
+            "When_a_HTTP_request_is_received": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "orderId": {
+                                "type": "string"
+                            },
+                            "customerId": {
+                                "type": "string"
+                            },
+                            "region": {
+                                "type": "string"
+                            },
+                            "orderDetails": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "productId": {
+                                            "type": "string"
+                                        },
+                                        "productName": {
+                                            "type": "string"
+                                        },
+                                        "quantity": {
+                                            "type": "integer"
+                                        },
+                                        "unitPrice": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "productId",
+                                        "productName",
+                                        "quantity",
+                                        "unitPrice"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "kind": "Stateful"
+}
