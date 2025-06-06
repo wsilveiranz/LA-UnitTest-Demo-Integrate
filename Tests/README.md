@@ -42,7 +42,7 @@ Tests/
 ### Prerequisites
 
 - .NET 8.0 SDK
-- Visual Studio 2022 or VS Code with C# extension
+- VS Code with C# extension
 - Azure Logic Apps Standard workspace (for testing against)
 
 ### Setup Instructions
@@ -70,32 +70,11 @@ Tests/
 
 ### TestExecutor Class
 
-The `TestExecutor` class provides the core testing infrastructure:
-
-```csharp
-public class TestExecutor
-{
-    public string rootDirectory;    // Path to Logic Apps workspace
-    public string logicAppName;     // Logic App folder name
-    public string workflow;         // Specific workflow to test
-    
-    public UnitTestExecutor Create(); // Creates test execution context
-}
-```
+The `TestExecutor` class provides the core testing infrastructure for executing Logic Apps workflows in isolation.
 
 ### Configuration Structure
 
-Each workflow test has its own `testSettings.config`:
-
-```xml
-<configuration>
-    <TestSettings>
-        <WorkspacePath>../../../../../</WorkspacePath>
-        <LogicAppName>LogicApps</LogicAppName>
-        <WorkflowName>la-calculate-discount</WorkflowName>
-    </TestSettings>
-</configuration>
-```
+Each workflow test has its own `testSettings.config` file that defines the workspace path, Logic App name, and specific workflow to test.
 
 ### Mock Data Framework
 
@@ -104,24 +83,7 @@ The testing framework uses two types of mocking:
 1. **Action Mocks**: Mock individual workflow actions
 2. **Trigger Mocks**: Mock workflow triggers and inputs
 
-Example mock structure:
-```csharp
-[TestMethod]
-public async Task Test_Calculate_Discount_APAC()
-{
-    // PREPARE - Create mock data
-    var mockData = this.GetTestMockDefinition("APAC", expectedDiscount);
-    
-    // ACT - Execute workflow with mocks
-    var testRun = await this.TestExecutor
-        .Create()
-        .RunWorkflowAsync(testMock: mockData);
-    
-    // ASSERT - Validate results
-    Assert.IsNotNull(testRun);
-    Assert.AreEqual(TestWorkflowStatus.Succeeded, testRun.Status);
-}
-```
+Tests follow the standard Arrange-Act-Assert pattern for validating workflow execution, status, and outputs.
 
 ## Available Test Suites
 
@@ -178,19 +140,13 @@ dotnet test --verbosity normal
 dotnet test --collect:"XPlat Code Coverage"
 ```
 
-### Visual Studio Execution
-
-1. Open `Tests.sln` in Visual Studio
-2. Build the solution (Ctrl+Shift+B)
-3. Open Test Explorer (Test → Test Explorer)
-4. Run individual tests or all tests
-
 ### VS Code Execution
 
-1. Install the C# extension
+1. Install the C# extension for VS Code
 2. Install .NET Core Test Explorer extension
 3. Open the Tests folder in VS Code
-4. Use the Test Explorer panel to run tests
+4. Use the Test Explorer panel to run individual tests or all tests
+5. Use the integrated terminal to run dotnet test commands
 
 ## Test Configuration
 
@@ -211,62 +167,16 @@ Tests use the following configuration sources:
 
 ## Writing New Tests
 
-### 1. Create Test Structure
+### Test Structure
 
-```
-la-your-workflow/
-├── testSettings.config
-├── MockOutputs/
-│   └── YourActionOutput.cs
-└── test-your-scenario/
-    ├── test-your-scenario.cs
-    └── test-your-scenario-mock.json
-```
+New workflow tests should follow the established folder structure with:
+- Test configuration files (`testSettings.config`)
+- Mock output classes in `MockOutputs/` folder
+- Test implementation files with mock data JSON files
 
-### 2. Configure Test Settings
+### Implementation Guidelines
 
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-    <TestSettings>
-        <WorkspacePath>../../../../../</WorkspacePath>
-        <LogicAppName>LogicApps</LogicAppName>
-        <WorkflowName>la-your-workflow</WorkflowName>
-    </TestSettings>
-</configuration>
-```
-
-### 3. Implement Test Class
-
-```csharp
-[TestClass]
-public class test_your_scenario
-{
-    public TestExecutor TestExecutor;
-
-    [TestInitialize]
-    public void Setup()
-    {
-        this.TestExecutor = new TestExecutor("la-your-workflow/testSettings.config");
-    }
-
-    [TestMethod]
-    public async Task Test_Your_Scenario()
-    {
-        // Arrange
-        var mockData = CreateMockData();
-        
-        // Act
-        var testRun = await this.TestExecutor
-            .Create()
-            .RunWorkflowAsync(testMock: mockData);
-        
-        // Assert
-        Assert.IsNotNull(testRun);
-        Assert.AreEqual(TestWorkflowStatus.Succeeded, testRun.Status);
-    }
-}
-```
+Test classes should use the MSTest framework with proper test initialization and the TestExecutor class for workflow execution. Each test should follow the Arrange-Act-Assert pattern for clear and maintainable test code.
 
 ## Best Practices
 
@@ -321,9 +231,9 @@ public class test_your_scenario
    dotnet test --verbosity diagnostic
    ```
 
-2. **Debug individual tests** in Visual Studio:
+2. **Debug individual tests** in VS Code:
    - Set breakpoints in test methods
-   - Use Debug → Start Debugging on specific tests
+   - Use the Debug configuration in VS Code to run tests with debugging
 
 3. **Validate workflow definitions**:
    - Use the Logic Apps Designer to verify workflow syntax
@@ -341,6 +251,6 @@ When adding new tests:
 
 ## References
 
-- [Azure Logic Apps Unit Testing Documentation](https://docs.microsoft.com/en-us/azure/logic-apps/test-logic-apps-mock-data-static-results)
+- [Azure Logic Apps Unit Testing Documentation](https://learn.microsoft.com/en-us/azure/logic-apps/testing-framework/create-unit-tests-standard-workflow-runs-visual-studio-code)
 - [MSTest Framework Documentation](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest)
 - [.NET Testing Best Practices](https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices)

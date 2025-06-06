@@ -9,7 +9,7 @@ __azurite_db*__.json
 .azure/
 
 ## Logic Apps
-workflow-designtime/local.settings.json
+workflow-designtime
 
 ## Build results
 bin/
