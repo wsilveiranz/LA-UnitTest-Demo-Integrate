@@ -1,76 +1,85 @@
 {
-    "definition": {
-        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-        "actions": {
-            "Send_message": {
-                "type": "ServiceProvider",
-                "inputs": {
-                    "parameters": {
-                        "entityName": "@parameters('queueName')",
-                        "message": {
-                            "contentData": "@triggerBody()",
-                            "contentType": "application/json"
-                        }
-                    },
-                    "serviceProviderConfiguration": {
-                        "connectionName": "serviceBus",
-                        "operationId": "sendMessage",
-                        "serviceProviderId": "/serviceProviders/serviceBus"
-                    }
-                },
-                "runAfter": {}
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "actions": {
+      "Send_message": {
+        "type": "ServiceProvider",
+        "inputs": {
+          "parameters": {
+            "entityName": "@parameters('queueName')",
+            "message": {
+              "contentData": "@triggerBody()",
+              "contentType": "application/json"
             }
+          },
+          "serviceProviderConfiguration": {
+            "connectionName": "serviceBus",
+            "operationId": "sendMessage",
+            "serviceProviderId": "/serviceProviders/serviceBus"
+          }
         },
-        "triggers": {
-            "When_a_HTTP_request_is_received": {
-                "type": "Request",
-                "kind": "Http",
-                "inputs": {
-                    "schema": {
-                        "type": "object",
-                        "properties": {
-                            "orderId": {
-                                "type": "string"
-                            },
-                            "customerId": {
-                                "type": "string"
-                            },
-                            "region": {
-                                "type": "string"
-                            },
-                            "orderDetails": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "productId": {
-                                            "type": "string"
-                                        },
-                                        "productName": {
-                                            "type": "string"
-                                        },
-                                        "quantity": {
-                                            "type": "integer"
-                                        },
-                                        "unitPrice": {
-                                            "type": "number"
-                                        }
-                                    },
-                                    "required": [
-                                        "productId",
-                                        "productName",
-                                        "quantity",
-                                        "unitPrice"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "contentVersion": "1.0.0.0",
-        "outputs": {}
+        "runAfter": {}
+      }
     },
-    "kind": "Stateful"
+    "triggers": {
+      "When_a_HTTP_request_is_received": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "orderId": {
+                "type": "string"
+              },
+              "customerId": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              },
+              "orderDetails": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "productId": {
+                      "type": "string"
+                    },
+                    "productName": {
+                      "type": "string"
+                    },
+                    "quantity": {
+                      "type": "integer"
+                    },
+                    "unitPrice": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "productId",
+                    "productName",
+                    "quantity",
+                    "unitPrice"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contentVersion": "1.0.0.0",
+    "outputs": {},
+    "metadata": {
+      "IaCMetadata": {
+        "IaCGenerationDate": "2025-06-11T15:10:38.576Z",
+        "IaCWorkflowCorrelationId": "026e3a95-60cc-4541-a2a6-b80ae296546e",
+        "LogicAppsExtensionVersion": "5.110.0",
+        "LogicAppsPinnedBundle": false,
+        "LogicAppsCurrentBundleVersion": "1.123.44"
+      }
+    }
+  },
+  "kind": "Stateful"
 }

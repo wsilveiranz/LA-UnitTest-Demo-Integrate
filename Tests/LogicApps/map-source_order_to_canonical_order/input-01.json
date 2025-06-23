@@ -1,0 +1,26 @@
+{
+  "orderId": "20250603-001",
+  "customerId": "X-789456",
+  "region": "NA",
+  "status": "New",
+  "orderDetails": [
+    {
+      "productId": "BRZ-1001",
+      "productName": "Brazilian Coffee Beans - 1kg",
+      "quantity": 2,
+      "unitPrice": 15
+    },
+    {
+      "productId": "COL-1002",
+      "productName": "Colombian Coffee Beans - 1kg",
+      "quantity": 1,
+      "unitPrice": 10
+    },
+    {
+      "productId": "JAV-1003",
+      "productName": "Indonesian Java Coffee Beans - 1kg",
+      "quantity": 3,
+      "unitPrice": 20
+    }
+  ]
+}

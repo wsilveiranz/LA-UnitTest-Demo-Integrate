@@ -1,0 +1,18 @@
+$version: 1
+$input: JSON
+$output: JSON
+$sourceSchema: source_order.json
+$targetSchema: canonical_order.json
+root:
+  orderId: concat("FC-", /root/orderId)
+  customerId: >-
+    if-then-else(starts-with(/root/customerId, "X-"), replace(/root/customerId,
+    "X-", "VIP-"), /root/customerId)
+  region: /root/region
+  status: if-then-else(exists(/root/status), upper-case(/root/status), "NEW")
+  orderDetails:
+    $for(/root/orderDetails/*):
+      productId: productId
+      productName: productName
+      quantity: quantity
+      unitPrice: unitPrice

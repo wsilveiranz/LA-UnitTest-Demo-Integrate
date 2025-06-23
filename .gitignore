@@ -7,6 +7,8 @@ __blobstorage__
 __queuestorage__
 __azurite_db*__.json
 .azure/
+lib/
+.debug/
 
 ## Logic Apps
 workflow-designtime
@@ -61,7 +63,6 @@ bld/
 ## .NET Core
 project.lock.json
 project.fragment.lock.json
-artifacts/
 
 ## NuGet
 *.nupkg
